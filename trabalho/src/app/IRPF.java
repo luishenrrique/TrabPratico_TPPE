@@ -304,4 +304,16 @@ public class IRPF {
         return soma;
     }
 
+    /**
+     * Calcula a base de cálculo do imposto de renda, que é a diferença da renda pelas deduções.
+     *
+     * @return base ed cálculo do imposto de renda
+     */
+    public float calcularBaseDeCalculo() {
+        float rendimentosTributaveis = getTotalRendimentosTributaveis();
+        float deducoes = getDeducao() + getTotalOutrasDeducoes();
+        return rendimentosTributaveis - deducoes;
+    }
+
+
 }
