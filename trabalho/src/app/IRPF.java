@@ -18,6 +18,7 @@ public class IRPF {
     private float totalPensaoAlimenticia;
     private String[] nomesDeducoes;
     private float[] valoresDeducoes;
+    private float valorTibutavel;
 
     public IRPF() {
         nomeRendimento = new String[0];
@@ -35,6 +36,8 @@ public class IRPF {
 
         nomesDeducoes = new String[0];
         valoresDeducoes = new float[0];
+
+        valorTibutavel = 0f;
     }
 
     /**
@@ -131,6 +134,54 @@ public class IRPF {
 
         numDependentes++;
     }
+
+    /**
+     * Calcula o imposto total devido pelo contribuinte com base nas faixas do IRPF.
+     *
+     * @return O valor total do imposto devido.
+     */
+
+    public float calcularImpostoTotal(float baseDeCalculo) {
+        float imposto = 0f;
+
+        // Faixa 1
+        if (baseDeCalculo > 2259.20) {
+            imposto += 0f * 2259.20f;
+        } else {
+            return 0f;
+        }
+
+        // Faixa 2
+        if (baseDeCalculo > 2826.65f) {
+            imposto += (2826.65f - 2259.20f) * 0.075f;
+        } else {
+            imposto += (baseDeCalculo - 2259.20f) * 0.075f;
+            return imposto;
+        }
+
+        // Faixa 3
+        if (baseDeCalculo > 3751.05f) {
+            imposto += (3751.05f - 2826.65f) * 0.15f;
+        } else {
+            imposto += (baseDeCalculo - 2826.65f) * 0.15f;
+            return imposto;
+        }
+
+        // Faixa 4
+        if (baseDeCalculo > 4664.68f) {
+            imposto += (4664.68f - 3751.05f) * 0.225f;
+        } else {
+            imposto += (baseDeCalculo - 3751.05f) * 0.225f;
+            return imposto;
+        }
+
+        // Faixa 5
+        imposto += (baseDeCalculo - 4664.68f) * 0.275f;
+
+        return imposto;
+    }
+
+
 
     /**
      * Método que retorna o numero de dependentes do contribuinte
@@ -303,17 +354,5 @@ public class IRPF {
         }
         return soma;
     }
-
-    /**
-     * Calcula a base de cálculo do imposto de renda, que é a diferença da renda pelas deduções.
-     *
-     * @return base ed cálculo do imposto de renda
-     */
-    public float calcularBaseDeCalculo() {
-        float rendimentosTributaveis = getTotalRendimentosTributaveis();
-        float deducoes = getDeducao() + getTotalOutrasDeducoes();
-        return rendimentosTributaveis - deducoes;
-    }
-
 
 }
