@@ -352,6 +352,7 @@ public class IRPF {
         }
         return soma;
     }
+
     /**
      * Calcula a base de cálculo do imposto de renda, que é a diferença da renda pelas deduções.
      *
@@ -361,5 +362,22 @@ public class IRPF {
         float rendimentosTributaveis = getTotalRendimentosTributaveis();
         float deducoes = getDeducao() + getTotalOutrasDeducoes();
         return rendimentosTributaveis - deducoes;
+    }
+
+    /**
+     * Calcula a alíquota efetiva do imposto pago.
+     *
+     * @return alíquota efetiva do imposto pago
+     */
+    public float calcularAliquotaEfetiva() {
+        float totalRendimentosTributaveis = getTotalRendimentosTributaveis();
+        float impostoTotal = calcularImpostoTotal(totalRendimentosTributaveis);
+
+        if (totalRendimentosTributaveis > 0) {
+            float aliquota = (100 * impostoTotal) / totalRendimentosTributaveis;
+            return aliquota;
+        } else {
+            return 0f;
+        }
     }
 }
