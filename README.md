@@ -6,6 +6,14 @@ FGA0242 - Técnicas de Programação para Plataformas Emergentes
 
 # Trabalhos práticos - semestre 2024/2
 
+## Alunos
+
+|Nome|Matrícula|
+|-|-|
+|Luis Henrique Luz Costa|180066161|
+|Pedro Lucas Garcia|190115548|
+|Taynara Cristina Ribeiro Marcellos|211031833|
+
 ## Descrição do cenário
 
 O Imposto de Renda de Pessoas Físicas (IRPF) é um imposto federal calculado com base na renda e despesas dedutíveis dos cidadãos brasileiros. De modo bastante resumido, o imposto considera, mensalmente, todas as rendas tributáveis recebidas pelo cidadão e todas suas deduções legais. A base de cálculo do IRPF é a diferença da renda pelas deduções de modo que o imposto devido é calculado sobre esse valor. Por fim, a alíquota efetiva é dada pelo quociente entre o imposto pago e o total de rendimentos tributáveis. Cada um desses passos está apresentado abaixo, através de um exemplo ilustrativo.
