@@ -141,46 +141,58 @@ public class IRPF {
      * @return O valor total do imposto devido.
      */
 
+   
     public float calcularImpostoTotal(float baseDeCalculo) {
+        if (baseDeCalculo <= 2259.20f) {
+            return 0f; 
+        }
+        
         float imposto = 0f;
-
-        // Faixa 1
-        if (baseDeCalculo > 2259.20) {
-            imposto += 0f * 2259.20f;
-        } else {
-            return 0f;
-        }
-
-        // Faixa 2
-        if (baseDeCalculo > 2826.65f) {
-            imposto += (2826.65f - 2259.20f) * 0.075f;
-        } else {
-            imposto += (baseDeCalculo - 2259.20f) * 0.075f;
-            return imposto;
-        }
-
-        // Faixa 3
-        if (baseDeCalculo > 3751.05f) {
-            imposto += (3751.05f - 2826.65f) * 0.15f;
-        } else {
-            imposto += (baseDeCalculo - 2826.65f) * 0.15f;
-            return imposto;
-        }
-
-        // Faixa 4
-        if (baseDeCalculo > 4664.68f) {
-            imposto += (4664.68f - 3751.05f) * 0.225f;
-        } else {
-            imposto += (baseDeCalculo - 3751.05f) * 0.225f;
-            return imposto;
-        }
-
-        // Faixa 5
-        imposto += (baseDeCalculo - 4664.68f) * 0.275f;
-
+        imposto += calcularFaixa1(baseDeCalculo);
+        imposto += calcularFaixa2(baseDeCalculo);
+        imposto += calcularFaixa3(baseDeCalculo);
+        imposto += calcularFaixa4(baseDeCalculo);
+        imposto += calcularFaixa5(baseDeCalculo);
+        
         return imposto;
     }
-
+    
+    private float calcularFaixa1(float baseDeCalculo) {
+        if (baseDeCalculo > 2259.20f) {
+            return 0f * 2259.20f; 
+        }
+        return 0f;
+    }
+    
+    private float calcularFaixa2(float baseDeCalculo) {
+        if (baseDeCalculo > 2826.65f) {
+            return (2826.65f - 2259.20f) * 0.075f;
+        }
+        return (baseDeCalculo - 2259.20f) * 0.075f;
+    }
+    
+    private float calcularFaixa3(float baseDeCalculo) {
+        if (baseDeCalculo > 3751.05f) {
+            return (3751.05f - 2826.65f) * 0.15f;
+        }
+        return (baseDeCalculo - 2826.65f) * 0.15f;
+    }
+    
+    private float calcularFaixa4(float baseDeCalculo) {
+        if (baseDeCalculo > 4664.68f) {
+            return (4664.68f - 3751.05f) * 0.225f;
+        }
+        return (baseDeCalculo - 3751.05f) * 0.225f;
+    }
+    
+    private float calcularFaixa5(float baseDeCalculo) {
+        if (baseDeCalculo > 4664.68f) {
+            return (baseDeCalculo - 4664.68f) * 0.275f;
+        }
+        return 0f;
+    }
+    
+    
     /**
      * Método que retorna o numero de dependentes do contribuinte
      *
