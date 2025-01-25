@@ -385,11 +385,7 @@ public class IRPF {
         float totalRendimentosTributaveis = getTotalRendimentosTributaveis();
         float impostoTotal = calcularImpostoTotal(totalRendimentosTributaveis);
 
-        if (totalRendimentosTributaveis > 0) {
-            float aliquota = (100 * impostoTotal) / totalRendimentosTributaveis;
-            return aliquota;
-        } else {
-            return 0f;
-        }
+        CalculadoraAliquota calculadora = new CalculadoraAliquota(totalRendimentosTributaveis, impostoTotal);
+        return calculadora.calcularAliquotaEfetiva();
     }
 }
