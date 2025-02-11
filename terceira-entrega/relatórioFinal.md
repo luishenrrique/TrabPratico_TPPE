@@ -95,6 +95,65 @@
 ## 2. Análise dos Code Smells no Trabalho Prático 2
 
 
+### Análise de Maus-Cheiros na Classe `IRPF`
+
+A classe `IRPF` apresenta diversos maus-cheiros de código que violam princípios de bom projeto. Abaixo estão os principais problemas identificados e suas respectivas justificativas.
+
+#### 1. **Tamanho excessivo da classe** (God Class)
+- A classe `IRPF` tem muitas responsabilidades distintas, como cadastro de rendimentos, dependentes, deduções e cálculo de imposto.
+- **Princípio violado**: Princípio da Responsabilidade Única (SRP - Single Responsibility Principle).
+- **Solução sugerida**: Dividir a classe em classes menores e especializadas, como `Rendimento`, `Dependente`, `Deducao` e `CalculadoraIRPF`.
+
+#### 2. **Uso excessivo de arrays para armazenar dados**
+- A classe mantém múltiplas listas de dados como `nomeRendimento`, `valorRendimento`, `nomesDependentes`, entre outras, sem encapsulamento adequado.
+- **Princípio violado**: Encapsulamento e Coesão.
+- **Solução sugerida**: Criar classes específicas para representar rendimentos, deduções e dependentes, utilizando `List<>` ao invés de arrays primitivos.
+
+#### 3. **Repetição de código** (Duplicated Code)
+- Métodos como `criarRendimento`, `cadastrarDependente` e `cadastrarDeducaoIntegral` seguem um padrão repetitivo ao expandir arrays manualmente.
+- **Princípio violado**: DRY (Don't Repeat Yourself).
+- **Solução sugerida**: Utilizar coleções como `List<>` para evitar manipulação manual de arrays.
+
+#### 4. **Uso de constantes numéricas explícitas** (Magic Numbers)
+- Há diversos números fixos no código, como `2259.20f`, `2826.65f`, `3751.05f`, etc.
+- **Princípio violado**: Princípio da Clareza e Manutenibilidade.
+- **Solução sugerida**: Criar constantes nomeadas para representar faixas de imposto e valores fixos.
+
+#### 5. **Métodos longos e de difícil compreensão**
+- Métodos como `calcularImpostoTotal` e `cadastrarDeducaoIntegral` realizam múltiplas operações e são difíceis de entender rapidamente.
+- **Princípio violado**: Princípio da Legibilidade e Simplicidade.
+- **Solução sugerida**: Refatorar esses métodos em funções menores e mais específicas.
+
+#### 6. **Dependência desnecessária na classe `CalculadoraAliquota`**
+- O método `calcularAliquotaEfetiva` instancia `CalculadoraAliquota` diretamente, criando um acoplamento forte.
+- **Princípio violado**: Inversão de Dependência (DIP - Dependency Inversion Principle).
+- **Solução sugerida**: Utilizar injeção de dependência para desacoplar a classe.
+
+### Análise de Maus-Cheiros na Classe `CalculadoraAliquota.java`
+
+#### 1. **Uso de Tipos de Dados Primitivos** (Primitive Obsession)
+   - O código utiliza `float` para representar valores financeiros, o que pode levar a problemas de precisão devido à natureza da aritmética de ponto flutuante.
+   - **Sugestão**: Utilizar `BigDecimal` para cálculos monetários e evitar possíveis erros de arredondamento.
+
+#### 2. **Falta de Tratamento de Exceções**
+   - O código assume que os valores passados no construtor sempre serão válidos (não negativos ou inválidos).
+   - **Sugestão**: Incluir validações no construtor para garantir que `totalRendimentosTributaveis` e `impostoTotal` não sejam negativos.
+
+#### 3. **Responsabilidade Única (SRP - Single Responsibility Principle)**
+   - A classe tem uma única responsabilidade: calcular a alíquota efetiva.
+   - **Ponto Positivo**: Isso segue bem o princípio SRP.
+
+
+## Conclusão
+A classe `IRPF` apresenta diversos problemas que impactam sua manutenção e extensibilidade. A refatoração recomendada envolve:
+- Separação de responsabilidades em classes menores.
+- Uso de estruturas de dados apropriadas (`List<>` em vez de arrays).
+- Evitar repetição de código através da reutilização de métodos.
+- Melhor organização do código para seguir princípios SOLID.
+
+A classe `CalculadoraAliquota` tem um propósito bem definido, mas pode ser aprimorada com boas práticas, como uso de BigDecimal e tratamento de exceções 
+
+Essas melhorias tornarão o código mais limpo, modular e fácil de manter.
 
 
 **Referência:**
