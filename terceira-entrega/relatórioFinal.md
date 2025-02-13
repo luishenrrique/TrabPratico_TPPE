@@ -205,6 +205,20 @@ Essas melhorias tornarão o código mais limpo, modular e fácil de manter.
     - **Explicação**: Adicionar validações no construtor para garantir que `totalRendimentosTributaveis` e `impostoTotal` não sejam negativos.
     - **Problema Resolvido**: Garante a integridade dos dados, evitando valores inválidos e melhorando a robustez do código.
 
+Ademais, nós executamos o SonarQube para analisar o código e ele nos deu issues de manutenabilidade para refatorar, como podem ser vistas nestas duas imagens:
+
+![Screenshot from 2025-02-13 19-27-40](https://github.com/user-attachments/assets/44b58404-85a3-4458-8bee-d04fbcec6a5a)
+
+Imagem 1 - Refatorações - Issues de manutenabilidade
+
+Autoria: SonarQube
+
+![Screenshot from 2025-02-13 19-27-58](https://github.com/user-attachments/assets/dab798bc-13d6-4c34-9924-527d4afd6e56)
+
+Imagem 2 - Refatorações - Issues de manutenabilidade
+
+Autoria: SonarQube
+
 ### Conclusão
 
 As operações de refatoração sugeridas visam melhorar a estrutura e a qualidade do código, tornando-o mais modular, legível e fácil de manter. A aplicação dessas refatorações ajudará a seguir os princípios SOLID e outras boas práticas de desenvolvimento de software.
