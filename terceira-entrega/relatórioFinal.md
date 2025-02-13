@@ -155,6 +155,59 @@ A classe `CalculadoraAliquota` tem um propósito bem definido, mas pode ser apri
 
 Essas melhorias tornarão o código mais limpo, modular e fácil de manter.
 
+## 3. Propostas de refatoração
+
+### Refatorações Sugeridas para a Classe IRPF
+
+1. **Divisão da Classe em Múltiplas Classes (God Class)**
+    - **Operação de Refatoração**: Extrair Classes
+    - **Explicação**: Dividir a classe IRPF em várias classes menores, cada uma com uma responsabilidade específica. Por exemplo:
+        - `Rendimento`: Para gerenciar rendimentos.
+        - `Dependente`: Para gerenciar dependentes.
+        - `Deducao`: Para gerenciar deduções.
+        - `CalculadoraIRPF`: Para cálculos relacionados ao IRPF.
+    - **Problema Resolvido**: Reduz a responsabilidade única da classe IRPF, seguindo o Princípio da Responsabilidade Única (SRP).
+
+2. **Encapsulamento de Dados (Uso Excessivo de Arrays)**
+    - **Operação de Refatoração**: Substituir Arrays por Objetos
+    - **Explicação**: Criar classes específicas para representar rendimentos, deduções e dependentes, e utilizar `List<>` ao invés de arrays primitivos.
+    - **Problema Resolvido**: Melhora o encapsulamento e a coesão, facilitando a manipulação de dados e evitando a manipulação manual de arrays.
+
+3. **Eliminação de Código Duplicado (Repetição de Código)**
+    - **Operação de Refatoração**: Extrair Método
+    - **Explicação**: Criar métodos reutilizáveis para operações repetitivas, como adicionar rendimentos, dependentes e deduções.
+    - **Problema Resolvido**: Reduz a duplicação de código, seguindo o princípio DRY (Don't Repeat Yourself).
+
+4. **Substituição de Números Mágicos (Uso de Constantes Numéricas Explícitas)**
+    - **Operação de Refatoração**: Introduzir Constantes
+    - **Explicação**: Definir constantes nomeadas para representar valores fixos, como faixas de imposto.
+    - **Problema Resolvido**: Melhora a clareza e a manutenibilidade do código, facilitando a compreensão dos valores utilizados.
+
+5. **Refatoração de Métodos Longos (Métodos Longos e de Difícil Compreensão)**
+    - **Operação de Refatoração**: Extrair Método
+    - **Explicação**: Dividir métodos longos em funções menores e mais específicas, cada uma realizando uma única operação.
+    - **Problema Resolvido**: Aumenta a legibilidade e simplicidade do código, facilitando a compreensão e manutenção.
+
+6. **Desacoplamento de Dependências (Dependência Desnecessária na Classe CalculadoraAliquota)**
+    - **Operação de Refatoração**: Introduzir Injeção de Dependência
+    - **Explicação**: Utilizar injeção de dependência para instanciar a classe `CalculadoraAliquota`, permitindo a substituição por outras implementações se necessário.
+    - **Problema Resolvido**: Reduz o acoplamento forte entre as classes, seguindo o Princípio da Inversão de Dependência (DIP).
+
+### Refatorações Sugeridas para a Classe CalculadoraAliquota
+
+1. **Substituição de Tipos Primitivos (Uso de Tipos de Dados Primitivos)**
+    - **Operação de Refatoração**: Substituir Tipos Primitivos por Objetos
+    - **Explicação**: Utilizar `BigDecimal` para representar valores financeiros, garantindo precisão nos cálculos.
+    - **Problema Resolvido**: Evita problemas de precisão devido à aritmética de ponto flutuante, melhorando a confiabilidade dos cálculos.
+
+2. **Validação de Dados (Falta de Tratamento de Exceções)**
+    - **Operação de Refatoração**: Introduzir Validação de Parâmetros
+    - **Explicação**: Adicionar validações no construtor para garantir que `totalRendimentosTributaveis` e `impostoTotal` não sejam negativos.
+    - **Problema Resolvido**: Garante a integridade dos dados, evitando valores inválidos e melhorando a robustez do código.
+
+### Conclusão
+
+As operações de refatoração sugeridas visam melhorar a estrutura e a qualidade do código, tornando-o mais modular, legível e fácil de manter. A aplicação dessas refatorações ajudará a seguir os princípios SOLID e outras boas práticas de desenvolvimento de software.
 
 **Referência:**
  - Livros:
